@@ -1,0 +1,26 @@
+# Render blueprint — see docs/DEPLOYMENT.md for full instructions.
+# Host environment variables (DATA_SOURCE, credentials, ADMIN_TOKEN, DEMO_MODE)
+# must be set in the Render dashboard, NOT in this file.
+services:
+  - type: web
+    name: ewaste-survey-platform
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DEMO_MODE
+        value: never
+      - key: DATA_SOURCE
+        value: none
+      # Set the following in the Render dashboard (secret values):
+      #   APPS_SCRIPT_URL            (Option A — Apps Script web app URL)
+      #   GOOGLE_SHEETS_ID           (Option B — sheet ID)
+      #   GOOGLE_API_KEY             (Option B — restricted API key)
+      #   GOOGLE_SHEET_GID           (Option B — tab gid, default 0)
+      #   SURVEY_URL                 (optional — public form link)
+      #   SURVEY_EMBED_URL           (optional — embeddable preview)
+      #   ADMIN_TOKEN                (required for admin diagnostics)

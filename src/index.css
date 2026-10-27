@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+
+  --color-brand-50: #f0fdf4;
+  --color-brand-100: #dcfce7;
+  --color-brand-200: #bbf7d0;
+  --color-brand-300: #86efac;
+  --color-brand-400: #4ade80;
+  --color-brand-500: #22c55e;
+  --color-brand-600: #16a34a;
+  --color-brand-700: #15803d;
+  --color-brand-800: #166534;
+  --color-brand-900: #14532d;
+
+  --color-leaf-50: #ecfdf5;
+  --color-leaf-600: #059669;
+  --color-leaf-700: #047857;
+
+  --animate-fade-in: fade-in 0.35s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: #fafdf9;
+  color: #1c2b23;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-brand-200);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-600);
+  outline-offset: 2px;
+}
+
+/* Recharts accessibility: keep chart text readable on light background */
+.recharts-text {
+  fill: #37503f;
+  font-size: 12px;
+}
+
+.recharts-default-tooltip {
+  border-radius: 8px !important;
+}
+
+/* Print / Save-as-PDF: show report content only */
+@media print {
+  header,
+  footer,
+  .no-print,
+  nav[aria-label="Main navigation"],
+  button {
+    display: none !important;
+  }
+  body {
+    background: #ffffff;
+  }
+  main {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 10px;
+    color: #555;
+  }
+}
